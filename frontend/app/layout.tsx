@@ -3,6 +3,7 @@ import './globals.css'
 import { ProblemProvider } from '@/context/ProblemContext'
 import { AuthProvider } from '@/context/AuthContext'
 import 'prismjs/themes/prism-tomorrow.css'
+import { SubmissionProvider } from '@/context/SubmissionsContext'
 
 export const metadata: Metadata = {
   title: 'AI LeetCode',
@@ -19,7 +20,9 @@ export default function RootLayout({
       <body>
         <AuthProvider>
           <ProblemProvider>
+            <SubmissionProvider>
             {children}
+            </SubmissionProvider>
           </ProblemProvider>
         </AuthProvider>
       </body>
