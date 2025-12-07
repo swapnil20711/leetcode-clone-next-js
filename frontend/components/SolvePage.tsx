@@ -7,9 +7,10 @@ import { useProblems } from '@/context/ProblemContext';
 import { useAuth } from '@/context/AuthContext';
 import { CodeEditorWindow } from './CodeEditorWindow';
 import { SupportedLanguage, SubmissionResult } from '@/types';
-import { Play, RotateCcw, CheckCircle, XCircle, AlertTriangle, Loader2 } from 'lucide-react';
+import { Play, RotateCcw, CheckCircle, XCircle, AlertTriangle, Loader2, History, ChevronDown, ChevronUp } from 'lucide-react';
 import { Navbar } from './Navbar';
 import { ProtectedRoute } from './ProtectedRoute';
+import { SubmissionsPage } from './SubmissionsPage';
 
 export const SolvePage: React.FC = () => {
   const params = useParams();
@@ -23,6 +24,7 @@ export const SolvePage: React.FC = () => {
   const [code, setCode] = useState('');
   const [isRunning, setIsRunning] = useState(false);
   const [result, setResult] = useState<SubmissionResult | null>(null);
+  const [showSubmissions, setShowSubmissions] = useState(false);
 
   // Sync problem state if slug changes or context loads
   useEffect(() => {
@@ -176,10 +178,43 @@ export const SolvePage: React.FC = () => {
              />
           </div>
 
+          {/* Submissions Section */}
+          {showSubmissions && problem && (
+            <div className="border-t border-white/10 bg-dark-layer flex flex-col h-1/3">
+              <div className="bg-dark-layer px-4 h-12 flex items-center justify-between shrink-0 border-b border-white/5">
+                <div className="flex items-center space-x-2">
+                  <History size={16} className="text-gray-400" />
+                  <span className="text-sm font-medium text-gray-400">Previous Submissions</span>
+                </div>
+                <button
+                  onClick={() => setShowSubmissions(false)}
+                  className="p-1.5 text-gray-400 hover:text-white transition-colors"
+                >
+                  <ChevronDown size={16} />
+                </button>
+              </div>
+              <div className="flex-1 overflow-y-auto">
+                <SubmissionsPage problemId={problem.id} limit={5} hideNavbar={true} />
+              </div>
+            </div>
+          )}
+
           {/* Results / Terminal Panel */}
           <div className={`border-t border-white/10 bg-[#1e1e1e] flex flex-col transition-all duration-300 ${result ? 'h-1/2' : 'h-12'}`}>
               <div className="bg-dark-layer px-4 h-12 flex items-center justify-between shrink-0 border-b border-white/5">
-                 <span className="text-sm font-medium text-gray-400">Test Result</span>
+                 <div className="flex items-center space-x-2">
+                   <span className="text-sm font-medium text-gray-400">Test Result</span>
+                   {!showSubmissions && (
+                     <button
+                       onClick={() => setShowSubmissions(true)}
+                       className="ml-4 flex items-center space-x-1 px-2 py-1 text-xs text-gray-400 hover:text-white hover:bg-white/10 rounded transition-colors"
+                       title="View Submissions"
+                     >
+                       <History size={14} />
+                       <span>Submissions</span>
+                     </button>
+                   )}
+                 </div>
                  <button 
                    onClick={handleRun} 
                    disabled={isRunning}

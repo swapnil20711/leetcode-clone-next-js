@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Code2, PlusCircle, List, LogOut, User } from 'lucide-react';
+import { Code2, PlusCircle, List, LogOut, User, FileText } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
 export const Navbar: React.FC = () => {
@@ -37,6 +37,17 @@ export const Navbar: React.FC = () => {
               <List size={18} />
               <span>Problems</span>
             </Link>
+            {isAuthenticated && (
+              <Link 
+                href="/submissions" 
+                className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  isActive('/submissions') ? 'text-white bg-white/10' : 'text-gray-400 hover:text-white'
+                }`}
+              >
+                <FileText size={18} />
+                <span>Submissions</span>
+              </Link>
+            )}
             {isAdmin && (
               <Link 
                 href="/add-problem" 

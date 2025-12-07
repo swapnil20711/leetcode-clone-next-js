@@ -46,3 +46,20 @@ export enum SupportedLanguage {
   CPP = 'cpp',
   JAVA = 'java'
 }
+
+export interface Submission {
+  _id: string;
+  id?: string;
+  userId: string;
+  problemId: string | {
+    _id: string;
+    title: string;
+    slug: string;
+    difficulty: Difficulty;
+  };
+  code: string;
+  language: string;
+  result: SubmissionResult;
+  createdAt: string;
+  updatedAt: string;
+}
