@@ -6,7 +6,7 @@ import 'prismjs/themes/prism-tomorrow.css'
 import { SubmissionProvider } from '@/context/SubmissionsContext'
 
 export const metadata: Metadata = {
-  title: 'AI LeetCode',
+  title: 'LeetCode Clone',
   description: 'A comprehensive coding platform clone where users can browse algorithmic problems, solve them in multiple languages with an AI-powered code judge, and create their own custom challenges.',
 }
 

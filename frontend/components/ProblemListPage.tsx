@@ -15,7 +15,9 @@ export const ProblemListPage: React.FC = () => {
   const [filter, setFilter] = useState('');
 
   const filteredProblems = problems.filter(p =>
-    p.title.toLowerCase().includes(filter.toLowerCase())
+    p.title.toLowerCase().includes(filter.toLowerCase()) ||
+    p.difficulty.toLowerCase().includes(filter.toLowerCase()) ||
+    p.description.toLowerCase().includes(filter.toLowerCase())
   );
   const getDifficultyColor = (diff: Difficulty) => {
     switch (diff) {

@@ -24,7 +24,7 @@ export const Navbar: React.FC = () => {
         <div className="flex items-center space-x-8">
           <Link href="/" className="flex items-center space-x-2 text-brand-orange hover:text-brand-darkOrange transition-colors">
             <Code2 size={24} />
-            <span className="font-bold text-xl tracking-tight">AI LeetCode</span>
+            <span className="font-bold text-xl tracking-tight">LeetCode Clone</span>
           </Link>
           
           <div className="flex items-center space-x-1">
